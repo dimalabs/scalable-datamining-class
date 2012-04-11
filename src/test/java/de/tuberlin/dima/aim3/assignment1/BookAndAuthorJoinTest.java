@@ -20,7 +20,7 @@ package de.tuberlin.dima.aim3.assignment1;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import de.tuberlin.dima.aim.exercises.HadoopAndPactTestcase;
+import de.tuberlin.dima.aim3.HadoopAndPactTestCase;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.util.Tool;
 import org.apache.mahout.common.iterator.FileLineIterable;
@@ -32,16 +32,16 @@ import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertTrue;
 
-public class BookAndAuthorJoinTest extends HadoopAndPactTestcase {
+public class BookAndAuthorJoinTest extends HadoopAndPactTestCase {
 
   @Test
   public void mapSideInMemoryJoin() throws Exception {
-    testJoin(new MapSideInMemoryBookAndAuthorJoin());
+    testJoin(new BookAndAuthorBroadcastJoin());
   }
 
   @Test
   public void reduceSideJoin() throws Exception {
-    testJoin(new ReduceSideBookAndAuthorJoin());
+    testJoin(new BookAndAuthorReduceSideJoin());
   }
 
   void testJoin(Tool bookAndAuthorJoin) throws Exception {

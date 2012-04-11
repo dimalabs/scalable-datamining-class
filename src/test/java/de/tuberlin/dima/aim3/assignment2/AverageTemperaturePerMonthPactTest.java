@@ -18,7 +18,8 @@
 package de.tuberlin.dima.aim3.assignment2;
 
 import com.google.common.collect.Lists;
-import de.tuberlin.dima.aim.exercises.HadoopAndPactTestcase;
+
+import de.tuberlin.dima.aim3.HadoopAndPactTestCase;
 import eu.stratosphere.pact.common.contract.MapContract;
 import eu.stratosphere.pact.common.contract.ReduceContract;
 import eu.stratosphere.pact.common.type.KeyValuePair;
@@ -33,7 +34,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class AverageTemperaturePerMonthPactTest extends HadoopAndPactTestcase {
+public class AverageTemperaturePerMonthPactTest extends HadoopAndPactTestCase {
 
   private static final Pattern SEPARATOR = Pattern.compile("\t");
 

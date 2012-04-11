@@ -18,8 +18,8 @@
 package de.tuberlin.dima.aim3.assignment2;
 
 import com.google.common.collect.Lists;
-import de.tuberlin.dima.aim.exercises.HadoopAndPactTestcase;
-import eu.stratosphere.pact.common.contract.DataSourceContract;
+import de.tuberlin.dima.aim3.HadoopAndPactTestCase;
+import eu.stratosphere.pact.common.contract.FileDataSourceContract;
 import eu.stratosphere.pact.common.contract.MatchContract;
 import eu.stratosphere.pact.common.type.Key;
 import eu.stratosphere.pact.common.type.KeyValuePair;
@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class BookAndAuthorJoinPactTest extends HadoopAndPactTestcase {
+public class BookAndAuthorJoinPactTest extends HadoopAndPactTestCase {
 
   private static final Pattern SEPARATOR = Pattern.compile("\t");
 
@@ -51,7 +51,7 @@ public class BookAndAuthorJoinPactTest extends HadoopAndPactTestcase {
     }
 
     TestPairs<Key,Value> secondInput =
-        testPlan.getInput((DataSourceContract<Key, Value>) matchContract.getSecondInput());
+        testPlan.getInput((FileDataSourceContract<Key, Value>) matchContract.getSecondInput());
     for (KeyValuePair<PactLong,BookAndAuthorJoinPact.BookAndYear> book : books()) {
       secondInput.add(book.getKey(), book.getValue());
     }
