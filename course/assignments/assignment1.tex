@@ -16,7 +16,7 @@
 \textsc{Technische Universit"at Berlin}{\small\hfill 
 AIM3: Scalable Data Mining and Data Analysis}\\
 {\small Database Systems and Information Management Group{\small\hfill Summer term 2012}\\
-Prof.~Dr.~Volker~Markl, Sebastian Schelter, Christoph Boden}
+Prof.~Dr.~Volker~Markl, Sebastian Schelter, Christoph Boden, Thomas Bodner}
 
 \bigskip
 \centerline{\Large\textbf{First Assignment}}
@@ -30,7 +30,7 @@ Prof.~Dr.~Volker~Markl, Sebastian Schelter, Christoph Boden}
 \begin{enumerate}
 \item \textbf{WordCount - \dq{}Hello World\dq of MapReduce}
 
-We'll start with the classic MapReduce example of counting words. Your task is to complete the code in \textit{de.tuberlin.dima.aim.exercises.one.FilteringWordCount}.
+We'll start with the classic MapReduce example of counting words. Your task is to complete the code in \textit{de.tuberlin.dima.aim3.assignment1.FilteringWordCount}.
 The output of this job should be a textfile holding the following data per line:
 
 \textit{word[TAB]count}.
@@ -39,12 +39,12 @@ An additional requirement here is that stop words like \textit{to}, \textit{and}
 
 \item \textbf{A custom Writable}
 
-You will work on your first custom Writable object in this task. Have a look at the class \textit{de.tuberlin.dima.aim.exercises.one.PrimeNumbersWritable}, which models a collection of prime numbers. Writable classes need to be able to serialize to and deserialize from a binary representation.
+You will work on your first custom Writable object in this task. Have a look at the class \textit{de.tuberlin.dima.aim3.assignment1.PrimeNumbersWritable}, which models a collection of prime numbers. Writable classes need to be able to serialize to and deserialize from a binary representation.
 Enable that for our custom Writable by implementing \textit{write(DataOutput out)} and \textit{readFields(DataInput in)}.
 
 \item \textbf{Average temperature per month}
 
-Have a look at the file \textit{src/test/resources/one/temperatures.tsv}. It contains the output of a fictional temperature sensor, where each line denotes the year, the month and the temperature of a single recording. Additionally a quality parameter is included which expresses how \dq{}sure\dq the sensor was of a single measurement:
+Have a look at the file \textit{src/test/resources/assignment1/temperatures.tsv}. It contains the output of a fictional temperature sensor, where each line denotes the year, the month and the temperature of a single recording. Additionally a quality parameter is included which expresses how \dq{}sure\dq the sensor was of a single measurement:
 
 \textit{year[TAB]month[TAB]temperature[TAB]quality}
 
@@ -52,7 +52,7 @@ Your task is to implement a MapReduce program that computes the average temperat
 
 \textit{year[TAB]month[TAB]average temperature}
 
-Use \textit{de.tuberlin.dima.aim.exercises.one.AverageTemperaturePerMonth} as a starting point.
+Use \textit{de.tuberlin.dima.aim3.assignment1.AverageTemperaturePerMonth} as a starting point.
 
 \newpage
 \centerline{\textbf{Parallel Joins in MapReduce}}
