@@ -50,8 +50,8 @@ public class BookAndAuthorJoinTest extends HadoopAndPactTestCase {
     File outputDir = getTestTempDir("output");
     outputDir.delete();
 
-    writeLines(authorsFile, readLines("/two/authors.tsv"));
-    writeLines(booksFile, readLines("/two/books.tsv"));
+    writeLines(authorsFile, readLines("/assignment1/authors.tsv"));
+    writeLines(booksFile, readLines("/assignment1/books.tsv"));
 
     Configuration conf = new Configuration();
 
