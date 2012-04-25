@@ -36,15 +36,15 @@ public class BookAndAuthorJoinTest extends HadoopAndPactTestCase {
 
   @Test
   public void mapSideInMemoryJoin() throws Exception {
-    testJoin(new BookAndAuthorBroadcastJoin());
+    testJoin(new BookAndAuthorBroadcastJoin(), true);
   }
 
   @Test
   public void reduceSideJoin() throws Exception {
-    testJoin(new BookAndAuthorReduceSideJoin());
+    testJoin(new BookAndAuthorReduceSideJoin(), false);
   }
 
-  void testJoin(Tool bookAndAuthorJoin) throws Exception {
+  void testJoin(Tool bookAndAuthorJoin, boolean mapOnly) throws Exception {
     File authorsFile = getTestTempFile("authors.tsv");
     File booksFile = getTestTempFile("books.tsv");
     File outputDir = getTestTempDir("output");
@@ -56,10 +56,12 @@ public class BookAndAuthorJoinTest extends HadoopAndPactTestCase {
     Configuration conf = new Configuration();
 
     bookAndAuthorJoin.setConf(conf);
-    bookAndAuthorJoin.run(new String[]{"--authors", authorsFile.getAbsolutePath(),
-        "--books", booksFile.getAbsolutePath(), "--output", outputDir.getAbsolutePath()});
+    bookAndAuthorJoin.run(new String[] { "--authors", authorsFile.getAbsolutePath(),
+        "--books", booksFile.getAbsolutePath(), "--output", outputDir.getAbsolutePath() });
 
-    Multimap<String, Book> booksByAuthors = readBooksByAuthors(new File(outputDir, "part-r-00000"));
+    String outputFilename = mapOnly ? "part-m-00000" : "part-r-00000";
+    
+    Multimap<String, Book> booksByAuthors = readBooksByAuthors(new File(outputDir, outputFilename));
 
     assertTrue(booksByAuthors.containsKey("Charles Bukowski"));
     assertTrue(booksByAuthors.get("Charles Bukowski")
