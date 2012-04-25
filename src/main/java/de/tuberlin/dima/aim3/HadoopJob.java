@@ -89,6 +89,50 @@ public abstract class HadoopJob extends Configured implements Tool {
     return job;
   }
 
+  protected Job prepareJob(Path inputPath, Path outputPath, Class<? extends InputFormat> inputFormat,
+       Class<? extends Mapper> mapper, Class<? extends Writable> mapperKey, Class<? extends Writable> mapperValue,
+       Class<? extends OutputFormat> outputFormat) throws IOException {
+
+    Job job = new Job(new Configuration(getConf()));
+    Configuration jobConf = job.getConfiguration();
+
+    if (mapper.equals(Mapper.class)) {
+      throw new IllegalStateException("Can't figure out the user class jar file from mapper/reducer");
+    } else {
+      job.setJarByClass(mapper);
+    }
+
+    job.setInputFormatClass(inputFormat);
+    jobConf.set("mapred.input.dir", inputPath.toString());
+
+    job.setMapperClass(mapper);
+    job.setMapOutputKeyClass(mapperKey);
+    job.setMapOutputValueClass(mapperValue);
+
+    jobConf.setBoolean("mapred.compress.map.output", true);
+
+    job.setNumReduceTasks(0);
+
+    job.setJobName(getCustomJobName(job, mapper));
+
+    job.setOutputFormatClass(outputFormat);
+    jobConf.set("mapred.output.dir", outputPath.toString());
+
+    return job;
+  }
+
+  private String getCustomJobName(JobContext job, Class<? extends Mapper> mapper) {
+    StringBuilder name = new StringBuilder();
+    String customJobName = job.getJobName();
+    if (customJobName == null || customJobName.trim().length() == 0) {
+      name.append(getClass().getSimpleName());
+    } else {
+      name.append(customJobName);
+    }
+    name.append('-').append(mapper.getSimpleName());
+    return name.toString();
+  }
+
   private String getCustomJobName(JobContext job, Class<? extends Mapper> mapper, Class<? extends Reducer> reducer) {
     StringBuilder name = new StringBuilder();
     String customJobName = job.getJobName();
