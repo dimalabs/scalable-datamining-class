@@ -18,6 +18,7 @@ public class CoGroupPact implements PlanAssembler, PlanAssemblerDescription {
     public static class CoGroupPactInFormat extends TextInputFormat<PactString, PactString> {
         @Override
         public boolean readLine(KeyValuePair<PactString, PactString> pair, byte[] line) {
+            //IMPLEMENT ME
             return true;
         }
     }
@@ -25,6 +26,7 @@ public class CoGroupPact implements PlanAssembler, PlanAssemblerDescription {
     public static class CoGroupOutFormat extends TextOutputFormat<PactString, PactInteger> {
         @Override
         public byte[] writeLine(KeyValuePair<PactString, PactInteger> pair) {
+            //IMPLEMENT ME
             return null;
         }
     }
@@ -33,6 +35,7 @@ public class CoGroupPact implements PlanAssembler, PlanAssemblerDescription {
         @Override
         public void coGroup(PactString key, Iterator<PactString> values1, Iterator<PactString> values2,
                 Collector<PactString, PactInteger> out) {
+            //IMPLEMENT ME
         }
     }
 
