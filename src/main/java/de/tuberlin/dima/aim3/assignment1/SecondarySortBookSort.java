@@ -6,6 +6,9 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
+import org.apache.hadoop.mapred.lib.InputSampler;
+import org.apache.hadoop.mapred.lib.TotalOrderPartitioner;
+import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 
@@ -25,6 +28,9 @@ public class SecondarySortBookSort extends HadoopJob {
     Path outputPath = new Path(parsedArgs.get("--output"));
 
     //IMPLEMENT ME
+
+    // in a real distributed setting, we would need to include a TotalOrderPartitioner and sample the input,
+    // for the sake of simplicity, we omit this here
 
     return 0;
   }

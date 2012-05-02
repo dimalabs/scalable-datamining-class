@@ -1,0 +1,92 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{german,anysize,amsmath,amssymb,amsthm,paralist, array}
+\usepackage{url}
+\selectlanguage{german}
+
+\pagestyle{empty}
+
+\setlength{\textheight}{27cm}
+\setlength{\parindent}{0cm}
+
+
+
+
+\begin{document}
+\textsc{Technische Universit"at Berlin}{\small\hfill 
+AIM3: Scalable Data Mining and Data Analysis}\\
+{\small Database Systems and Information Management Group{\small\hfill Summer term 2012}\\
+Prof.~Dr.~Volker~Markl, Sebastian Schelter, Christoph Boden, Thomas Bodner}
+
+\bigskip
+\centerline{\Large\textbf{First Assignment}}
+\centerline{\emph{MapReduce and Hadoop}}
+\centerline{Due on May 2nd}
+\bigskip
+
+\centerline{\textbf{Basics of MapReduce and Hadoop}}
+\bigskip
+
+\begin{enumerate}
+\item \textbf{WordCount - \dq{}Hello World\dq of MapReduce}
+
+We'll start with the classic MapReduce example of counting words. Your task is to complete the code in \textit{de.tuberlin.dima.aim3.assignment1.FilteringWordCount}.
+The output of this job should be a textfile holding the following data per line:
+
+\textit{word[TAB]count}.
+
+An additional requirement here is that stop words like \textit{to}, \textit{and}, \textit{in} or \textit{the} should be removed from the input data and all words should be lowercased.
+
+\item \textbf{A custom Writable}
+
+You will work on your first custom Writable object in this task. Have a look at the class \textit{de.tuberlin.dima.aim3.assignment1.PrimeNumbersWritable}, which models a collection of prime numbers. Writable classes need to be able to serialize to and deserialize from a binary representation.
+Enable that for our custom Writable by implementing \textit{write(DataOutput out)} and \textit{readFields(DataInput in)}.
+
+\item \textbf{Average temperature per month}
+
+Have a look at the file \textit{src/test/resources/assignment1/temperatures.tsv}. It contains the output of a fictional temperature sensor, where each line denotes the year, the month and the temperature of a single recording. Additionally a quality parameter is included which expresses how \dq{}sure\dq the sensor was of a single measurement:
+
+\textit{year[TAB]month[TAB]temperature[TAB]quality}
+
+Your task is to implement a MapReduce program that computes the average temperature per month of year. It should ignore all records that are below a given minimum quality. The output of your program will be a textfile holding the following data per line: 
+
+\textit{year[TAB]month[TAB]average temperature}
+
+Use \textit{de.tuberlin.dima.aim3.assignment1.AverageTemperaturePerMonth} as a starting point.
+
+\newpage
+\centerline{\textbf{Parallel Joins in MapReduce}}
+
+Next we deal with bibliographic data about authors and books located in the folder \textit{src/test/resources/assignment1/}. Author names and ids are contained in the file \textit{authors.tsv}, the file \textit{books.tsv} contains books,  their year of publication and their author id. We will use MapReduce and Hadoop to sort and join this data.
+
+\item \textbf{Sort the books with \dq{}Secondary Sort\dq}
+
+We want to transform the book data into a list of \textit{(century, title)}-tuples, where century just denotes the first two digits of the year of publication. Each line in the output file should have the format
+
+\textit{century[TAB]book title}.
+
+The output data must be sorted ascending by century and title. You must not sort the data yourself, but must use Hadoop's \dq{}Secondary Sort\dq capabilities to have the framework do the sorting for you in the shuffle phase.
+
+\item \textbf{Join books and authors with a \dq{}Broadcast Join\dq}
+
+In this task we will perform an inner join of the books and authors on the author id. Use a \dq{}Broadcast Join\dq: load the smaller dataset into memory in your mapper class and perform the join before sending the tuples to the reducer over the network. Each line in the output file must have the format:
+
+\textit{authorname[TAB]book title[TAB]year of publication}
+
+
+\item \textbf{Join books and authors with a \dq{}Reduce-side Join\dq}
+
+We will peform the same join here as in task 5, but we will use another technique called \dq{}Reduce-side Join\dq. The join should be performed in the reducer class, an optimal solution should also avoid buffering more than one value in the reducer.
+
+\end{enumerate}
+
+\bigskip
+\centerline{\textbf{Deadline}}
+\bigskip
+
+Source code for the exercises is available at \textit{https://github.com/dimalabs/scalable-datamining-class}. 
+\\
+\\
+Register in the ISIS information system at \textit{https://www.isis.tu-berlin.de/course/view.php?id=6535} and upload your solution in the form of a patch file until May 2nd.
+
+\end{document}
