@@ -55,7 +55,7 @@ public class AverageTemperaturePerMonthPactTest extends HadoopAndPactTestCase {
 
     TestPlan testPlan = new TestPlan(reduceContract);
 
-    for (String line : readLines("/one/temperatures.tsv")) {
+    for (String line : readLines("/assignment1/temperatures.tsv")) {
       testPlan.getInput().add(PactNull.getInstance(), new PactString(line));
     }
 
@@ -69,7 +69,7 @@ public class AverageTemperaturePerMonthPactTest extends HadoopAndPactTestCase {
 
   Iterable<KeyValuePair<AverageTemperaturePerMonthPact.YearMonthKey, PactDouble>> expectedResults() throws IOException {
     List<KeyValuePair<AverageTemperaturePerMonthPact.YearMonthKey, PactDouble>> results = Lists.newArrayList();
-    for (String line : readLines("/three/averageTemperatures.tsv")) {
+    for (String line : readLines("/assignment1/averageTemperatures.tsv")) {
       String[] tokens = SEPARATOR.split(line);
       results.add(new KeyValuePair<AverageTemperaturePerMonthPact.YearMonthKey, PactDouble>(
           new AverageTemperaturePerMonthPact.YearMonthKey(Short.parseShort(tokens[0]), Short.parseShort(tokens[1])),

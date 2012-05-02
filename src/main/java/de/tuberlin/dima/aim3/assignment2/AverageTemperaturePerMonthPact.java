@@ -28,6 +28,7 @@ public class AverageTemperaturePerMonthPact implements PlanAssembler, PlanAssemb
 
   @Override
   public Plan getPlan(String... args) throws IllegalArgumentException {
+    //IMPLEMENT ME
     return null;
   }
 

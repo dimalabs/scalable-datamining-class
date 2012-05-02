@@ -65,7 +65,7 @@ public class BookAndAuthorJoinPactTest extends HadoopAndPactTestCase {
 
   Iterable<KeyValuePair<PactLong, PactString>> authors() throws IOException {
     List<KeyValuePair<PactLong,PactString>> results = Lists.newArrayList();
-    for (String line : readLines("/two/authors.tsv")) {
+    for (String line : readLines("/assignment1/authors.tsv")) {
       String[] tokens = SEPARATOR.split(line);
       results.add(new KeyValuePair<PactLong, PactString>(new PactLong(Long.parseLong(tokens[0])),
           new PactString(tokens[1])));
@@ -75,7 +75,7 @@ public class BookAndAuthorJoinPactTest extends HadoopAndPactTestCase {
 
   Iterable<KeyValuePair<PactLong,BookAndAuthorJoinPact.BookAndYear>> books() throws IOException {
     List<KeyValuePair<PactLong,BookAndAuthorJoinPact.BookAndYear>> results = Lists.newArrayList();
-    for (String line : readLines("/two/books.tsv")) {
+    for (String line : readLines("/assignment1/books.tsv")) {
       String[] tokens = SEPARATOR.split(line);
       BookAndAuthorJoinPact.BookAndYear bookAndYear = new BookAndAuthorJoinPact.BookAndYear(tokens[2],
           Short.parseShort(tokens[1]));
@@ -87,7 +87,7 @@ public class BookAndAuthorJoinPactTest extends HadoopAndPactTestCase {
 
   Iterable<KeyValuePair<PactString,BookAndAuthorJoinPact.BookAndYear>> results() throws IOException {
     List<KeyValuePair<PactString,BookAndAuthorJoinPact.BookAndYear>> results = Lists.newArrayList();
-    for (String line : readLines("/three/joinedBooksAndAuthors.tsv")) {
+    for (String line : readLines("/assignment1/joinedBooksAndAuthors.tsv")) {
       System.out.println(line);
       String[] tokens = SEPARATOR.split(line);
       BookAndAuthorJoinPact.BookAndYear bookAndYear = new BookAndAuthorJoinPact.BookAndYear(tokens[1],
