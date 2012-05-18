@@ -1,0 +1,59 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{german,anysize,amsmath,amssymb,amsthm,paralist, array}
+\usepackage{url}
+\selectlanguage{german}
+
+\pagestyle{empty}
+
+\setlength{\textheight}{27cm}
+\setlength{\parindent}{0cm}
+
+
+
+
+\begin{document}
+\textsc{Technische Universit"at Berlin}{\small\hfill 
+AIM3: Scalable Data Mining and Data Analysis}\\
+{\small Database Systems and Information Management Group{\small\hfill Summer term 2012}\\
+Prof.~Dr.~Volker~Markl, Sebastian Schelter, Christoph Boden, Thomas Bodner}
+
+\bigskip
+\centerline{\Large\textbf{Third Assignment}}
+\centerline{\emph{Linear Algebra on Parallel Processing Platforms}}
+\centerline{Due on May 30th}
+\bigskip
+
+\centerline{\textbf{Search as Linear Algebra}}
+\bigskip
+
+\begin{enumerate}
+\item \textbf{Search as matrix vector multiplication}
+
+We have seen that search can be expressed as multiplication of the corpus matrix with a query vector. In \textit{de.tuberlin.dima.aim3.assignment3.SearchAsMatrixVectorMultiplication} you have to implement the vectorization of the corpus,
+which is supplied in a textfile holding the following data per line:
+
+\textit{documentID;terms}.
+
+A query file is supplied that needs to be mapped to the vector for the multiplication. The result of the job is a vector 
+whose entries denote the number of matched terms for each document.
+
+\textit{Hint}: Use \textit{de.tuberlin.dima.aim3.assignment3.Dictionary} to map terms to matrix dimensions.
+
+\item \textbf{Inverting an index as matrix transposition}
+
+When searching documents, one usually builds a so called \textit{Inverted Index}, a data structure that for each term holds the documents containing it.
+Conceptually the inverted index is equivalent to the transposed corpus matrix, which points from terms to documents. In \textit{de.tuberlin.dima.aim3.assignment3.MatrixTransposition} you have to implement matrix transposition for this task.
+
+\end{enumerate}
+
+\bigskip
+\centerline{\textbf{Deadline}}
+\bigskip
+
+Source code for the exercises is available at \textit{https://github.com/dimalabs/scalable-datamining-class}. 
+\\
+\\
+Upload your solution to ISIS in the form of a patch file until noon of May 30th.
+
+\end{document}
