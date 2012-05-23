@@ -60,8 +60,10 @@ public class SearchAsMatrixVectorMultiplicationTest extends HadoopAndPactTestCas
     SearchAsMatrixVectorMultiplication search = new SearchAsMatrixVectorMultiplication();
     search.setConf(conf);
 
-    search.run(new String[] { "--input", inputFile.getAbsolutePath(), "--query", queryFile.getAbsolutePath(),
-        "--output", outputDir.getAbsolutePath(), "--matrix", corpusAsMatrix.getAbsolutePath() });
+    search.run(new String[] { "--input", inputFile.getAbsolutePath(),
+    		"--query", queryFile.getAbsolutePath(),
+    		"--output", outputDir.getAbsolutePath(),
+    		"--matrix", corpusAsMatrix.getAbsolutePath() });
 
     SparseVector result = readResult(new File(outputDir, "part-r-00000"), conf);
 
