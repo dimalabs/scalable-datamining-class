@@ -41,9 +41,11 @@ public class SearchAsMatrixVectorMultiplicationTest extends HadoopAndPactTestCas
   @Test
   public void search() throws Exception {
 
+	File corpusAsMatrix = getTestTempFile("corpusAsMatrix");
     File inputFile = getTestTempFile("lotr.txt");
     File queryFile = getTestTempFile("query.txt");
     File outputDir = getTestTempDir("output");
+    corpusAsMatrix.delete();
     outputDir.delete();
 
     writeLines(inputFile,
@@ -59,7 +61,7 @@ public class SearchAsMatrixVectorMultiplicationTest extends HadoopAndPactTestCas
     search.setConf(conf);
 
     search.run(new String[] { "--input", inputFile.getAbsolutePath(), "--query", queryFile.getAbsolutePath(),
-        "--output", outputDir.getAbsolutePath() });
+        "--output", outputDir.getAbsolutePath(), "--matrix", corpusAsMatrix.getAbsolutePath() });
 
     SparseVector result = readResult(new File(outputDir, "part-r-00000"), conf);
 

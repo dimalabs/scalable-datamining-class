@@ -23,8 +23,10 @@ public class MatrixTranspositionTest extends HadoopAndPactTestCase {
   @Test
   public void transpose() throws Exception {
 
+	File corpusAsMatrix = getTestTempFile("corpusAsMatrix");
     File inputFile = getTestTempFile("lotr.txt");
     File outputDir = getTestTempDir("output");
+    corpusAsMatrix.delete();
     outputDir.delete();
 
     writeLines(inputFile,
@@ -37,7 +39,7 @@ public class MatrixTranspositionTest extends HadoopAndPactTestCase {
     MatrixTransposition transposition = new MatrixTransposition();
     transposition.setConf(conf);
 
-    transposition.run(new String[] { "--input", inputFile.getAbsolutePath(), "--output", outputDir.getAbsolutePath() });
+    transposition.run(new String[] { "--input", inputFile.getAbsolutePath(), "--output", outputDir.getAbsolutePath(), "--matrix", corpusAsMatrix.getAbsolutePath() });
 
     Map<Integer, SparseVector> invertedIndex = readResult(new File(outputDir, "part-r-00000"), conf);
 
