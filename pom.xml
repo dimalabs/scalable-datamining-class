@@ -24,7 +24,7 @@
     </repository>
     <repository>
       <id>stratosphere.eu</id>
-      <url>https://www.stratosphere.eu/maven2/</url>
+      <url>http://www.stratosphere.eu/maven2/</url>
     </repository>
   </repositories>
 
