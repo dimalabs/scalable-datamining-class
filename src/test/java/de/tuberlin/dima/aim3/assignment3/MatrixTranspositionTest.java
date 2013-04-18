@@ -52,10 +52,10 @@ public class MatrixTranspositionTest extends HadoopAndPactTestCase {
     assertEquals(0, rowForRing.get(3), 0);
 
     SparseVector rowForDarkness = invertedIndex.get(Dictionary.indexOf("darkness"));
-    assertEquals(0, rowForRing.get(0), 0);
-    assertEquals(0, rowForRing.get(1), 0);
-    assertEquals(0, rowForRing.get(2), 0);
-    assertEquals(1, rowForRing.get(3), 0);
+    assertEquals(0, rowForDarkness.get(0), 0);
+    assertEquals(0, rowForDarkness.get(1), 0);
+    assertEquals(0, rowForDarkness.get(2), 0);
+    assertEquals(1, rowForDarkness.get(3), 0);
   }
 
   protected Map<Integer, SparseVector> readResult(File outputFile, Configuration conf) throws IOException {
@@ -67,12 +67,12 @@ public class MatrixTranspositionTest extends HadoopAndPactTestCase {
       IntWritable row = new IntWritable();
       SparseVector vector = new SparseVector();
 
+      boolean hasAtLeastOneRow = reader.next(row, vector);
+      Preconditions.checkState(hasAtLeastOneRow, "result must have at least one value");
+      
       while (reader.next(row, vector)) {
         invertedIndex.put(new Integer(row.get()), vector.clone());
       }
-
-      boolean hasAtLeastOneRow = reader.next(row, vector);
-      Preconditions.checkState(hasAtLeastOneRow, "result must have at least one value");
 
       return invertedIndex;
 
