@@ -24,7 +24,7 @@
     </repository>
     <repository>
       <id>stratosphere.eu</id>
-      <url>https://www.stratosphere.eu/maven2/</url>
+      <url>https://stratosphere.dima.tu-berlin.de/maven2/</url>
     </repository>
   </repositories>
 
@@ -61,7 +61,7 @@
       <artifactId>log4j</artifactId>
       <version>1.2.14</version>
     </dependency>
-    <dependency>
+    <!--dependency>
       <groupId>eu.stratosphere</groupId>
       <artifactId>pact-common</artifactId>
       <version>${stratosphere.version}</version>
@@ -70,7 +70,7 @@
       <groupId>eu.stratosphere</groupId>
       <artifactId>pact-clients</artifactId>
       <version>${stratosphere.version}</version>
-    </dependency>
+    </dependency-->
   </dependencies>
 
   <build>
