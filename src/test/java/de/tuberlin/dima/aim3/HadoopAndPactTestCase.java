@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class HadoopAndPactTestCase extends AbstractTestCase {
+public abstract class HadoopAndPactTestCase {
+
+  public static final Double EPSILON = 0.0001;
 
   private File testTempDir;
   private Path testTempDirPath;
